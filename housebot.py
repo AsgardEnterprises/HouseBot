@@ -1,7 +1,9 @@
 __author__ = 'Kadi'
 import zoopla
 import google_maps
-import json
+
+import config
+
 
 ADDRESSES_FILENAME = 'addresses.json'
 
@@ -23,11 +25,7 @@ params = {
     'page_size': '100'          # the size of each page of results, default 10, maximum 100
 }
 
-# read in the addresses from file
-with open(ADDRESSES_FILENAME) as f:
-    json_addresses = f.read()
 
-addresses = json.loads(json_addresses)
 
 matching_properties_zoopla = zoopla.get_properties(max_listing_age, params)
-matching_properties = google_maps.get_time_to_work(matching_properties_zoopla, addresses)
+matching_properties = google_maps.get_time_to_work(matching_properties_zoopla, config.user_addresses)
