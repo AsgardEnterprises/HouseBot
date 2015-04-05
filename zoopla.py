@@ -1,12 +1,12 @@
 __author__ = 'Kadi'
 import requests
-import json
 from datetime import datetime, time, timedelta
 
-import config
+import credentials
 
 
 BASE_ZOOPLA_URI = 'http://api.zoopla.co.uk/api/v1/property_listings.js'  # remove '.js' for xml output
+
 
 def get_properties(max_listing_age, params):
     # construct the parameter string to include the parameters that have values
@@ -16,11 +16,14 @@ def get_properties(max_listing_age, params):
             param_string += "{0}={1}&".format(param, params[param])
 
     # construct the url
-    url = "{0}?{1}api_key={2}".format(BASE_ZOOPLA_URI, param_string, config.zoopla_api_key)
+    url = "{0}?{1}api_key={2}".format(BASE_ZOOPLA_URI, param_string, credentials.zoopla_api_key)
 
     response = requests.get(url)
-    json_response = response._content       # json string
-    dict_data = json.loads(json_response)    # dictionary
+    if response.status_code == 403:
+        print 'Invalid Zoopla credentials! Please double check your Zoopla API key.'
+        exit()
+
+    dict_data = response.json()
 
     print('Url: ' + url)
 
