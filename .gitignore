@@ -3,3 +3,5 @@ venv/
 api_key.txt
 *.pyc
 addresses.json
+/venv-housebot/
+/api_key.json
