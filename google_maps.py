@@ -1,9 +1,9 @@
-__author__ = 'Kadi'
 import requests
 import json
 import time
 
 BASE_GOOGLE_MAPS_URI = 'https://maps.googleapis.com/maps/api/directions/json'
+
 
 def get_time_to_work(selected_properties, addresses):
     print('')
@@ -36,15 +36,15 @@ def send_request(url):
     :return:
     """
     response = requests.get(url)
-    dict_data = json.loads(response._content)
+    dict_data = json.loads(response.content)
     if dict_data['status'] == 'OVER_QUERY_LIMIT':
         time.sleep(2)
         response = requests.get(url)
-        dict_data = json.loads(response._content)
+        dict_data = json.loads(response.content)
 
     if dict_data['status'] == 'OVER_QUERY_LIMIT':
         time.sleep(2)
         response = requests.get(url)
-        dict_data = json.loads(response._content)
+        dict_data = json.loads(response.content)
 
     return dict_data
