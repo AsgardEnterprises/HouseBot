@@ -35,5 +35,4 @@ house_member_commuting_destinations = {
   'Bob': 'Buckingham Palace, London SW1A 1AA'
 }
 
-house_member_email_addresses = {
-}
+house_member_email_addresses = ["your-email-at-something-dot-com", "housemate's-email-dot-something-else-dot-co-dot-uk"]

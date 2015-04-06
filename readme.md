@@ -15,12 +15,9 @@ credentials into it, i.e.
 ```
 
 - investigate config.py and update it with housing preferences relevant for you (add emails of all the people who
-want to be notified when new houses are found in the house_member_email_addresses in JSON format, i.e
+want to be notified when new houses are found in the house_member_email_addresses in a string list, i.e
 ```
-{
-    "email": "email@gmail.com",
-    "email2": "email2@gmail.com"
-}
+["email@gmail.com", "email2@gmail.com"]
 ```
 
 - pip install -r requirements.txt
