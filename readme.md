@@ -14,11 +14,8 @@ credentials into it, i.e.
 }
 ```
 
-- investigate config.py and update it with housing preferences relevant for you (add emails of all the people who
-want to be notified when new houses are found in the house_member_email_addresses in a string list, i.e
-```
-["email@gmail.com", "email2@gmail.com"]
-```
+- investigate config.py and update it with housing preferences relevant for you. In particulary, add the house member
+details to house_member_details
 
 - pip install -r requirements.txt
 

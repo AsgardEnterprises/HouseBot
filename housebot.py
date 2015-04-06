@@ -13,5 +13,5 @@ matching_properties_zoopla = zoopla.get_properties(
 # Find the group's commute time to all properties that passed the filtering process.
 matching_properties = google_maps.get_time_to_work(
     selected_properties=matching_properties_zoopla,
-    addresses=config.house_member_commuting_destinations
+    house_memeber_details=config.house_member_details
 )

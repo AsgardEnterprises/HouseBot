@@ -27,12 +27,23 @@ house_search_parameters = {
 # want to be swamped by 'old' results
 house_maximum_listing_age = 60 * 12  # In minutes
 
+
+# Warning! Since this is stored in a dictionary later, house member name must be unique!
 # Work (or other destination!) addresses of the household-members-to-be.
 # HouseBot will check the travel time to each destination below
 # for each property that passes the search filtering.
-house_member_commuting_destinations = {
-  'Alice': '221b Baker Street, London NW1 6XE',
-  'Bob': 'Buckingham Palace, London SW1A 1AA'
-}
-
-house_member_email_addresses = ["your-email-at-something-dot-com", "housemate's-email-dot-something-else-dot-co-dot-uk"]
+# the emails will be used to notify if a new house is available
+house_member_details = [
+    {
+        "name": "Alice",
+        "commute_destination": "221B Baker Street",
+        "email_address": "alice@useagmailaddress.com",
+        "max_commute_time_in_minutes": 45
+    },
+    {
+        "name": "Bob",
+        "commute_destination": "221B Baker Street",
+        "email_address": "bob@useagmailaddress.com",
+        "max_commute_time_in_minutes": 30
+    }
+]

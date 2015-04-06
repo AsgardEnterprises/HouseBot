@@ -6,7 +6,13 @@ import emailer
 BASE_GOOGLE_MAPS_URI = 'https://maps.googleapis.com/maps/api/directions/json'
 
 
-def get_time_to_work(selected_properties, addresses):
+def get_time_to_work(selected_properties, house_memeber_details):
+
+    # get the name-value pairs of house members and their addresses from the details
+    addresses = {}
+    for house_member in house_memeber_details:
+        addresses[house_member["name"]] = house_member["commute_destination"]
+
     email_message_body = ''
 
     # read each property

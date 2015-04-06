@@ -10,7 +10,10 @@ def send_notification_emails(text):
     :param text:
     :return:
     """
-    recipients = config.house_member_email_addresses
+    recipients = []
+    house_member_details = config.house_member_details
+    for house_member in house_member_details:
+        recipients.append(house_member["email_address"])
 
     if len(recipients) == 0:
         print("No email addresses specified. No emails will be sent.")
