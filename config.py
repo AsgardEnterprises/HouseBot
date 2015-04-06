@@ -34,3 +34,6 @@ house_member_commuting_destinations = {
   'Alice': '221b Baker Street, London NW1 6XE',
   'Bob': 'Buckingham Palace, London SW1A 1AA'
 }
+
+house_member_email_addresses = {
+}
