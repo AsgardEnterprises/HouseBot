@@ -43,5 +43,9 @@ def send_email(recipients, text):
         server.sendmail(FROM, TO, message)
         server.close()
         print 'successfully sent the mail'
-    except:
-        print "failed to send mail"
+    except smtplib.SMTPAuthenticationError as e:
+        print "Failed to send email due to an authentication error."
+        print "SMTPAuthenticationError: " + str(e.smtp_error)
+    except Exception as e:
+        print "Failed to send mail"
+        print str(e.args)
