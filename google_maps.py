@@ -1,31 +1,42 @@
 import requests
 import json
 import time
+import emailer
 
 BASE_GOOGLE_MAPS_URI = 'https://maps.googleapis.com/maps/api/directions/json'
 
 
-def get_time_to_work(selected_properties, addresses):
-    print('')
+def get_time_to_work(selected_properties, house_memeber_details):
+
+    # get the name-value pairs of house members and their addresses from the details
+    addresses = {}
+    for house_member in house_memeber_details:
+        addresses[house_member["name"]] = house_member["commute_destination"]
+
+    email_message_body = ''
 
     # read each property
     for prop in selected_properties:
-        print('Property address: ' + prop['displayable_address'])
+        email_message_body += 'Property address: ' + prop['displayable_address'] + '\n'
+        email_message_body += 'Link: ' + 'http://www.zoopla.co.uk/to-rent/details/' + prop['listing_id'] + '\n'
         origin_address = prop['displayable_address'].replace(' ', '+')
 
         for address in addresses:
-            print(address + ' travel: ')
+            email_message_body += address + ' travel: ' + '\n'
             destination_address = addresses[address].replace(' ', '+')
             url_driving = '{0}?origin={1}&destination={2}'.format(BASE_GOOGLE_MAPS_URI, origin_address, destination_address)
             dict_data = send_request(url_driving)
-            print('Driving: {0} ({1})'.format(dict_data['routes'][0]['legs'][0]['duration']['text'],
-                                              dict_data['routes'][0]['legs'][0]['distance']['text']))
-            url_transit = '{0}?origin={1}&destination={2}&mode=transit'.format(BASE_GOOGLE_MAPS_URI, origin_address, destination_address)
+            email_message_body += ('Driving: {0} ({1})'.format(dict_data['routes'][0]['legs'][0]['duration']['text'],
+                                                               dict_data['routes'][0]['legs'][0]['distance']['text']) + '\n')
+            url_transit = '{0}?origin={1}&destination={2}&mode=transit'.format(BASE_GOOGLE_MAPS_URI,
+                                                                               origin_address, destination_address)
             dict_data = send_request(url_transit)
-            print('Transit: {0} ({1})'.format(dict_data['routes'][0]['legs'][0]['duration']['text'],
-                                              dict_data['routes'][0]['legs'][0]['distance']['text']))
-
-        print('')
+            email_message_body += 'Transit: {0} ({1})'.format(dict_data['routes'][0]['legs'][0]['duration']['text'],
+                                              dict_data['routes'][0]['legs'][0]['distance']['text']) + '\n'
+        email_message_body += '\n'
+    # send email notifying that new properties have been found
+    print(email_message_body)
+    emailer.send_notification_emails(email_message_body)
 
 
 def send_request(url):
