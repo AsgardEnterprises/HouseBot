@@ -3,7 +3,7 @@
 A tool to get notifications of the latest houses in your area with travel information to various locations.
 
 ## Setting up Dev environment
-- create a new file api_key.json in the root directory of the project and add the Zoopla API key into it, i.e.
+- create a new file api_key.json in the root directory of the project and add your Zoopla API key into it, i.e.
 
 ```
 {
@@ -11,16 +11,9 @@ A tool to get notifications of the latest houses in your area with travel inform
 }
 ```
 
-- create a new file addresses.json and add the addresses you want to check for in json format, i.e
-
-```
-{
-    "name": "Address",
-    "name2": "Address"
-}
-```
+- investigate config.py and update it with housing preferences relevant for you
 
 - pip install -r requirements.txt
 
 ## Instructions
-- simply run housebot.py (any parameters for the listing details or age can be edited in manually housebot.py)
+- Simply run housebot.py (any parameters for the listing details or age can be edited in manually housebot.py)
